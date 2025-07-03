@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://onionplay.github.io/sitemap.xml

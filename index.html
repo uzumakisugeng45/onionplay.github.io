@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OnionPlay - Watch Free Movies & TV Shows Online in HD</title>
+  <meta name="description" content="OnionPlay is your ultimate destination to watch free movies and TV shows online in HD. No registration, no fees—just unlimited streaming of the latest and greatest entertainment.">
+  <meta name="keywords" content="OnionPlay, free movies, watch TV shows, HD streaming, online movies, movie streaming, TV streaming, no registration, latest movies, trending TV shows, binge watch, movie site, free streaming, entertainment, watch online">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="https://i.imgur.com/Hsfm5go.png" type="image/png">
+  <link rel="canonical" href="https://onionplay.github.io">
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "OnionPlay",
+    "url": "https://onionplay.github.io",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://onionplay.github.io/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="OnionPlay - Watch Free Movies & TV Shows Online in HD">
+  <meta property="og:description" content="OnionPlay is your ultimate destination to watch free movies and TV shows online in HD. No registration, no fees—just unlimited streaming of the latest and greatest entertainment.">
+  <meta property="og:image" content="https://i.imgur.com/Hsfm5go.png">
+  <meta property="og:url" content="https://onionplay.github.io">
+  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts for Colorful Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: #fff;
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #222;
+      padding: 30px 0 20px 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin-bottom: 10px;
+      background: #fff;
+      object-fit: cover;
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #ff8a00, #e52e71, #00c3ff, #f7b42c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      margin: 0 0 10px 0;
+    }
+    h2, h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: #f7b42c;
+      margin-top: 40px;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #ff8a00;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px 0 20px;
+    }
+    .search-area {
+      margin: 30px auto 40px auto;
+      text-align: center;
+    }
+    .search-input {
+      width: 60%;
+      max-width: 400px;
+      padding: 12px 18px;
+      border-radius: 30px;
+      border: none;
+      font-size: 1.1rem;
+      color: #222;
+      margin-right: 10px;
+      outline: none;
+    }
+    .search-btn {
+      background: linear-gradient(90deg, #e52e71, #ff8a00);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .search-btn:hover {
+      background: linear-gradient(90deg, #ff8a00, #e52e71);
+    }
+    .movie-list, .tv-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .movie-card, .tv-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 18px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      width: 180px;
+      padding: 18px 12px 20px 12px;
+      text-align: center;
+      transition: transform 0.2s;
+      position: relative;
+    }
+    .movie-card:hover, .tv-card:hover {
+      transform: translateY(-8px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .poster {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      background: #222;
+    }
+    .title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 6px;
+      min-height: 40px;
+    }
+    .year {
+      color: #f7b42c;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+    .play-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #00c3ff, #e52e71);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: background 0.3s;
+    }
+    .play-btn:hover {
+      background: linear-gradient(90deg, #e52e71, #00c3ff);
+    }
+    footer {
+      background: #181818;
+      color: #fff;
+      text-align: center;
+      padding: 40px 10px 20px 10px;
+      margin-top: 60px;
+      font-size: 1.1rem;
+      border-top: 3px solid #f7b42c;
+    }
+    .footer-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      background: #fff;
+      object-fit: cover;
+    }
+    .footer-links {
+      margin: 18px 0 10px 0;
+    }
+    .footer-links a {
+      color: #f7b42c;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: #ff8a00;
+    }
+    @media (max-width: 700px) {
+      .movie-list, .tv-list { gap: 18px; }
+      .movie-card, .tv-card { width: 44vw; min-width: 140px; }
+      .container { padding: 18px 4vw 0 4vw; }
+      .search-input { width: 80%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.imgur.com/Hsfm5go.png" alt="OnionPlay Logo" class="logo">
+    <h1>OnionPlay</h1>
+    <div class="subtitle">Watch Free Movies & TV Shows Online in HD – No Registration, No Fees!</div>
+  </header>
+  <div class="container">
+    <section>
+      <h2>Welcome to OnionPlay – Your Ultimate Free Streaming Hub</h2>
+      <p>
+        <strong>OnionPlay</strong> is the leading platform for streaming the latest movies and TV shows online, absolutely free. With a vast and ever-growing library, OnionPlay brings you the best in entertainment—blockbusters, trending series, timeless classics, and hidden gems—without any subscription or registration. Our mission is to make high-quality entertainment accessible to everyone, everywhere, at any time.
+      </p>
+      <p>
+        Whether you’re a fan of action, drama, comedy, romance, or documentaries, OnionPlay has something for every taste. Our user-friendly interface, advanced search, and curated categories make it easy to discover new favorites or revisit old classics. Enjoy seamless streaming in HD and 4K, with multiple servers for uninterrupted viewing.
+      </p>
+      <ul>
+        <li><b>Zero Subscription Cost:</b> Watch unlimited movies and TV shows for free.</li>
+        <li><b>No Registration Required:</b> Start streaming instantly—no sign-up, no hassle.</li>
+        <li><b>HD & 4K Streaming:</b> Enjoy crystal-clear visuals and immersive sound.</li>
+        <li><b>Multi-Device Support:</b> Stream on your phone, tablet, laptop, or smart TV.</li>
+        <li><b>Global Content:</b> Access Hollywood hits, Bollywood blockbusters, K-dramas, anime, and more.</li>
+        <li><b>Advanced Search & Filters:</b> Find your favorite titles by genre, year, rating, or language.</li>
+        <li><b>Regular Updates:</b> New movies and episodes added daily.</li>
+        <li><b>Privacy First:</b> No personal data required—your viewing is always private.</li>
+        <li><b>Ad-Lite Experience:</b> Minimal ads for maximum enjoyment.</li>
+        <li><b>Community Driven:</b> User ratings and reviews help you pick the best content.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How to Watch Movies & TV Shows on OnionPlay</h2>
+      <ol>
+        <li><b>Visit OnionPlay:</b> Go to our homepage. If the site is down, try our mirror links.</li>
+        <li><b>Search or Browse:</b> Use the search bar or explore categories like Trending, New Releases, or Top Rated.</li>
+        <li><b>Select a Title:</b> Click on a movie or show to open its streaming page.</li>
+        <li><b>Choose a Server:</b> Pick from multiple streaming servers for the best experience.</li>
+        <li><b>Press Play:</b> Enjoy instant streaming—no downloads or logins required!</li>
+      </ol>
+      <p>
+        <b>Troubleshooting:</b> If a video doesn’t load, try another server, refresh the page, or clear your browser cache. For more help, visit our troubleshooting page.
+      </p>
+    </section>
+
+    <section>
+      <h2>Why Choose OnionPlay?</h2>
+      <ul>
+        <li><b>Unmatched Variety:</b> From the latest blockbusters to indie films and cult classics, our library is unmatched.</li>
+        <li><b>Family Friendly:</b> Separate categories for kids and family viewing.</li>
+        <li><b>Personalized Recommendations:</b> Get suggestions based on your viewing history.</li>
+        <li><b>Subtitles & Accessibility:</b> Multilingual subtitles and accessibility features for all users.</li>
+        <li><b>Safe & Secure:</b> State-of-the-art encryption and no data tracking.</li>
+        <li><b>Global Reach:</b> Content from every corner of the world, updated daily.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>OnionPlay Features at a Glance</h2>
+      <table style="width:100%;background:rgba(255,255,255,0.05);color:#fff;border-radius:12px;">
+        <tr>
+          <th style="color:#f7b42c;">Feature</th>
+          <th style="color:#f7b42c;">Description</th>
+        </tr>
+        <tr>
+          <td>HD & 4K Streaming</td>
+          <td>Enjoy movies and shows in stunning high definition and ultra HD quality.</td>
+        </tr>
+        <tr>
+          <td>Multi-Device Support</td>
+          <td>Watch on smartphones, tablets, laptops, and smart TVs.</td>
+        </tr>
+        <tr>
+          <td>Advanced Search</td>
+          <td>Find content by title, genre, year, or actor instantly.</td>
+        </tr>
+        <tr>
+          <td>Curated Playlists</td>
+          <td>Discover themed collections and staff picks.</td>
+        </tr>
+        <tr>
+          <td>Minimal Ads</td>
+          <td>Enjoy an ad-lite experience for uninterrupted viewing.</td>
+        </tr>
+        <tr>
+          <td>Privacy Protection</td>
+          <td>No registration or personal data required.</td>
+        </tr>
+        <tr>
+          <td>Regular Updates</td>
+          <td>New movies and episodes added every day.</td>
+        </tr>
+        <tr>
+          <td>Community Reviews</td>
+          <td>Read and share ratings and reviews with other users.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Search for Movies & TV Shows</h2>
+      <div class="search-area">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search for movies or TV shows...">
+        <button class="search-btn" onclick="searchTMDB()">Search</button>
+      </div>
+      <div id="searchResults"></div>
+    </section>
+
+    <center>
+      <script type="text/javascript">
+      atOptions = {
+      'key' : '4475681ea72ef1ba73f46e67ce13309a',
+      'format' : 'iframe',
+      'height' : 60,
+      'width' : 468,
+      'params' : {}
+      };
+      </script>
+      <script type="text/javascript" src="//grandshinyinsert.com/4475681ea72ef1ba73f46e67ce13309a/invoke.js"></script>
+    </center>
+
+    <section>
+      <h2>Popular Movies</h2>
+      <div class="movie-list" id="movieList"></div>
+    </section>
+    <section>
+      <h2>Popular TV Shows</h2>
+      <div class="tv-list" id="tvList"></div>
+    </section>
+
+    <section>
+      <h2>Frequently Asked Questions</h2>
+      <h3>Is OnionPlay really free?</h3>
+      <p>Yes! OnionPlay is 100% free. You can watch unlimited movies and TV shows without paying a cent or registering an account.</p>
+      <h3>Is it safe to use OnionPlay?</h3>
+      <p>OnionPlay does not require any personal information, and we use secure streaming protocols. However, always use caution and ensure you are accessing the official site or trusted mirrors.</p>
+      <h3>What devices are supported?</h3>
+      <p>OnionPlay works on all modern devices—smartphones, tablets, laptops, and smart TVs.</p>
+      <h3>How often is content updated?</h3>
+      <p>New movies and TV episodes are added daily, so you’ll always find something new to watch.</p>
+      <h3>Do I need to download anything?</h3>
+      <p>No downloads are required. All content is streamed directly in your browser.</p>
+    </section>
+  </div>
+
+  <footer>
+    <img src="https://i.imgur.com/Hsfm5go.png" alt="OnionPlay Logo" class="footer-logo">
+    <div class="footer-links">
+      <a href="https://onionplay.github.io" target="_blank">Home</a> |
+      <a href="#movieList">Popular Movies</a> |
+      <a href="#tvList">Popular TV Shows</a> |
+      <a href="#searchInput">Search</a>
+    </div>
+    <div>
+      &copy; 2025 OnionPlay. All rights reserved. <br>
+      Designed with <span style="color:#e52e71;">&#10084;</span> for movie lovers worldwide.
+    </div>
+  </footer>
+
+  <!-- Histats.com  START  (aync)-->
+  <script type="text/javascript">var _Hasync= _Hasync|| [];
+  _Hasync.push(['Histats.start', '1,4926023,4,0,0,0,00010000']);
+  _Hasync.push(['Histats.fasi', '1']);
+  _Hasync.push(['Histats.track_hits', '']);
+  (function() {
+  var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+  hs.src = ('//s10.histats.com/js15_as.js');
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+  })();</script>
+  <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4926023&101" alt="frontpage hit counter" border="0"></a></noscript>
+  <!-- Histats.com  END  -->
+
+  <script>
+    // Fetch 12 popular movies from TMDB
+    fetch('https://api.themoviedb.org/3/movie/popular?api_key=e0b203e42e12587b6ce507b8aa452e8c&language=en-US&page=1')
+      .then(response => response.json())
+      .then(data => {
+        const movies = data.results.slice(0, 12);
+        const movieList = document.getElementById('movieList');
+        movies.forEach(item => {
+          const year = item.release_date ? item.release_date.split('-')[0] : '';
+          movieList.innerHTML += `
+            <div class="movie-card">
+              <img class="poster" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title}">
+              <div class="title">${item.title}</div>
+              <div class="year">${year}</div>
+              <a class="play-btn" href="https://onionplay.github.io/player.html?id=${item.id}" target="_blank">Play Now</a>
+            </div>
+          `;
+        });
+      });
+
+    // Fetch 12 popular TV shows from TMDB
+    fetch('https://api.themoviedb.org/3/tv/popular?api_key=e0b203e42e12587b6ce507b8aa452e8c&language=en-US&page=1')
+      .then(response => response.json())
+      .then(data => {
+        const tvs = data.results.slice(0, 12);
+        const tvList = document.getElementById('tvList');
+        tvs.forEach(item => {
+          const year = item.first_air_date ? item.first_air_date.split('-')[0] : '';
+          tvList.innerHTML += `
+            <div class="tv-card">
+              <img class="poster" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.name}">
+              <div class="title">${item.name}</div>
+              <div class="year">${year}</div>
+              <a class="play-btn" href="https://onionplay.github.io/player.html?tv=${item.id}" target="_blank">Play Now</a>
+            </div>
+          `;
+        });
+      });
+
+    // Search functionality
+    function searchTMDB() {
+      const query = document.getElementById('searchInput').value.trim();
+      if (!query) return;
+      const userLang = navigator.language || 'en-US';
+      const url = `https://tmdb.cdnweb.info/get.php?url=search/multi&lang=${userLang}&query=${encodeURIComponent(query)}`;
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const results = data.results || [];
+          let html = '<div class="movie-list">';
+          results.slice(0, 12).forEach(item => {
+            let title = item.title || item.name || 'Untitled';
+            let year = (item.release_date || item.first_air_date || '').split('-')[0];
+            let poster = item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : 'https://via.placeholder.com/180x260?text=No+Image';
+            let link = item.media_type === 'tv'
+              ? `https://onionplay.github.io/player.html?tv=${item.id}`
+              : `https://onionplay.github.io/player.html?id=${item.id}`;
+            html += `
+              <div class="movie-card">
+                <img class="poster" src="${poster}" alt="${title}">
+                <div class="title">${title}</div>
+                <div class="year">${year}</div>
+                <a class="play-btn" href="${link}" target="_blank">Play Now</a>
+              </div>
+            `;
+          });
+          html += '</div>';
+          document.getElementById('searchResults').innerHTML = html;
+        });
+    }
+    document.getElementById('searchInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') searchTMDB();
+    });
+  </script>
+</body>
+</html>

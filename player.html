@@ -1,0 +1,602 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Watch Now - Free HD Streaming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.2/lumen/bootstrap.min.css" rel="stylesheet" />
+  <style>
+<style>
+:root {
+  color-scheme: dark;
+}
+body {
+  background: #111;
+  color: #fff;
+  padding: 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#movieHeader {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 5px solid #f39c12;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  word-wrap: break-word;
+}
+
+#movieTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f1c40f;
+}
+
+#movieTagline {
+  font-style: italic;
+  color: #bbb;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 576px) {
+  #movieHeader {
+    padding: 1rem;
+  }
+
+  #movieTitle {
+    font-size: 1.5rem;
+  }
+
+  #movieTagline {
+    font-size: 0.95rem;
+  }
+}
+
+/* Player */
+#playerWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  background: #000;
+}
+
+#playerLoader, #playerEmbed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+#playerLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  z-index: 5;
+  backdrop-filter: blur(8px) brightness(0.6);
+}
+
+#playerLoader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  z-index: 1;
+}
+
+#playerLoader > * {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+#streamPlayer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 15px;
+}
+
+@supports not (aspect-ratio: 16/9) {
+  #playerWrapper {
+    height: 0;
+    padding-bottom: 56.25%;
+  }
+}
+
+/* Select Dropdown */
+#serverSelect {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+
+/* Ad Banner */
+#ad-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+#ad-script-container {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Episode list */
+#tvEpisodeList {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  margin-top: 30px;
+  color: #fff;
+}
+
+#tvEpisodeList h3 {
+  margin-bottom: 20px;
+  color: #00d9ff;
+  font-weight: 600;
+}
+
+#tvEpisodeList h4 {
+  color: #ffc107;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.episode-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 20px 0;
+}
+
+.episode-list li {
+  display: inline-block;
+  margin: 4px;
+}
+
+.episode-list a {
+  display: inline-block;
+  background: #2a2a2a;
+  color: #eee;
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.episode-list a:hover {
+  background: #007bff;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Poster & Detail */
+.movie-poster {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+#movieDetail .row {
+  align-items: flex-start;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+}
+
+#movieDetail .col-md-4 {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+#movieDetail .col-md-8 {
+  padding-left: 2rem;
+}
+
+@media (max-width: 768px) {
+  #movieDetail .row {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  #movieDetail .col-md-8 {
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+
+  .movie-poster {
+    margin: 0 auto 1rem auto;
+    display: block;
+  }
+}
+
+
+</style>
+
+  
+  <style>#ad-banner{display:flex;justify-content:center;align-items:center;margin:20px 0}</style>
+
+</head>
+<body>
+
+<div class="container" id="moviePlayer">
+
+<!-- Movie Header -->
+<div id="movieHeader" class="p-4 mb-4 text-white rounded">
+  <h1 id="movieTitle" class="mb-0">Loading...</h1>
+  <p id="movieTagline" class="text-muted mb-0"></p>
+</div>
+
+
+
+<div id="ad-banner" class="text-center my-4">
+  <div id="ad-script-container" ></div>
+  
+    <script type="text/javascript">
+	atOptions = {
+		'key' : '4475681ea72ef1ba73f46e67ce13309a',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//apprenticelandfallenough.com/4475681ea72ef1ba73f46e67ce13309a/invoke.js"></script>
+</div>
+
+
+<!-- Player Controls -->
+<div class="mb-3">
+    
+<div class="form-group mb-3">
+  <label for="serverSelect" style="font-weight: 500;">Server:</label>
+  <select id="serverSelect" class="form-control w-auto d-inline-block ml-2" onchange="setPlayer(this.value, this)">
+    <option value="vidsrcc">Vidsrc.cc (Default)</option>
+    <option value="vidsrcxyz">Vidsrc.xyz</option>
+    <option value="gdrive">GDrivePlayer</option>
+  </select>
+</div>
+
+
+  <div id="playerWrapper">
+    <div id="playerLoader">
+      <div>
+        <div class="spinner-border text-warning" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="mt-2">Loading player...</div>
+      </div>
+    </div>
+    
+    <div id="playerEmbed" style="display:none; position:relative;">
+  <iframe id="streamPlayer" allow="autoplay; fullscreen" allowfullscreen onload="hidePlayerLoader()" onerror="handlePlayerError()"></iframe>
+  <div id="iframeOverlay" style="position:absolute;inset:0;z-index:10;background:transparent;"></div>
+</div>
+
+
+
+
+  </div>
+</div>
+
+<div id="tvEpisodeList" class="my-4"></div>
+
+
+<!-- Movie Detail -->
+<div class="container" id="movieDetail">
+</div>
+
+</div>
+
+
+<script>
+  const apiKey = 'e0b203e42e12587b6ce507b8aa452e8c';
+  const imageBase = 'https://image.tmdb.org/t/p/w500';
+  const profileBase = 'https://image.tmdb.org/t/p/w185';
+  const backdropBase = 'https://image.tmdb.org/t/p/original';
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const movieId = urlParams.get('id');
+  const tvId = urlParams.get('tv');
+  const seasonNumber = urlParams.get('s');
+  const episodeNumber = urlParams.get('e');
+
+// Auto-redirect if needed
+if (tvId) {
+  const newUrl = new URL(window.location.href);
+
+  if (!seasonNumber && !episodeNumber) {
+    newUrl.searchParams.set('tv', tvId);
+    newUrl.searchParams.set('s', '1');
+    newUrl.searchParams.set('e', '1');
+    window.location.replace(newUrl.toString());
+  } else if (seasonNumber && !episodeNumber) {
+    newUrl.searchParams.set('tv', tvId);
+    newUrl.searchParams.set('s', seasonNumber);
+    newUrl.searchParams.set('e', '1');
+    window.location.replace(newUrl.toString());
+  }
+}
+
+  const container = document.getElementById('movieDetail');
+  const containerPlayer = document.getElementById('moviePlayer');
+  const streamPlayer = document.getElementById('streamPlayer');
+  const playerLoader = document.getElementById('playerLoader');
+  const playerEmbed = document.getElementById('playerEmbed');
+
+  let players = {};
+  let trailerKey = null;
+
+function setPlayer(sourceKey) {
+  if (players[sourceKey]) {
+    const reloadedUrl = players[sourceKey] + '?autoplay=1&t=' + Date.now();
+    playerLoader.style.display = 'flex';
+    playerEmbed.style.display = 'none';
+    streamPlayer.src = reloadedUrl;
+    
+     // eset iframeOverlay each time a new player loads
+    const overlay = document.getElementById('iframeOverlay');
+    if (overlay) {
+      overlay.style.display = 'block'; // show it again
+      setTimeout(() => overlay.style.display = 'none', 2000); // hide after 2s
+    }
+  }
+}
+
+// Auto-switch logic (optional)
+let triedFallback = false;
+
+function handlePlayerError() {
+  if (!triedFallback) {
+    triedFallback = true;
+    const nextPlayer = document.getElementById('serverSelect');
+    if (nextPlayer && nextPlayer.value !== 'vidsrcxyz') {
+      nextPlayer.value = 'vidsrcxyz';
+      setPlayer('vidsrcxyz');
+      return;
+    }
+  }
+
+  // Show error if no fallback works
+  playerLoader.style.display = 'none';
+  playerEmbed.style.display = 'block';
+  const fallbackMsg = `
+    <div class="alert alert-danger text-center mt-3" style="border: 1px solid red;">
+      <strong>⚠️ Player failed to load!</strong><br>
+      Try switching to another server from the dropdown above.
+    </div>
+  `;
+
+  if (!document.getElementById('player-error')) {
+    const wrapper = document.createElement('div');
+    wrapper.id = 'player-error';
+    wrapper.innerHTML = fallbackMsg;
+    playerEmbed.parentNode.insertBefore(wrapper, playerEmbed.nextSibling);
+  }
+}
+
+  function hidePlayerLoader() {
+    playerLoader.style.display = 'none';
+    playerEmbed.style.display = 'block';
+  }
+
+  function playTrailer() {
+    if (trailerKey) {
+      const youtubeUrl = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&rel=0`;
+      playerLoader.style.display = 'flex';
+      playerEmbed.style.display = 'none';
+      streamPlayer.src = youtubeUrl;
+      document.getElementById('playerWrapper').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  if (movieId) {
+    document.getElementById('tvEpisodeList').style.display = 'none';
+
+    Promise.all([
+    fetch(`https://tmdb.cdnweb.info/get.php?url=${encodeURIComponent(`movie/${movieId}`)}&lang=en-US`).then(res => res.json()),
+    fetch(`https://tmdb.cdnweb.info/get.php?url=${encodeURIComponent(`movie/${movieId}/videos`)}`).then(res => res.json()),
+    fetch(`https://tmdb.cdnweb.info/get.php?url=${encodeURIComponent(`movie/${movieId}/credits`)}`).then(res => res.json())
+])
+
+    .then(([movie, videoData, credits]) => {
+      players = {
+        vidsrcc: `https://vidsrc.cc/v2/embed/movie/${movie.id}`,
+        vidsrcxyz: `https://vidsrc.xyz/embed/movie/${movie.id}`,
+        gdrive: `https://databasegdriveplayer.xyz/player.php?imdb=${movie.imdb_id}`
+      };
+      //streamPlayer.src = players.vidsrcc;
+      document.getElementById('serverSelect').value = 'vidsrcc';
+setPlayer('vidsrcc');
+
+
+      if (movie.backdrop_path) {
+        playerLoader.style.backgroundImage = `url('${backdropBase + movie.backdrop_path}')`;
+      }
+
+      
+      document.getElementById('movieTitle').textContent = `${movie.title} (${new Date(movie.release_date).getFullYear()})`;
+      document.getElementById('movieTagline').textContent = movie.tagline || '';
+
+      const genreList = movie.genres.map(g => g.name).join(', ');
+      const companies = movie.production_companies.map(c => c.name).join(', ');
+      const lang = movie.original_language.toUpperCase();
+      const trailer = videoData.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+            if (trailer) trailerKey = trailer.key;
+
+      const cast = credits.cast.slice(0, 6);
+
+      let castHTML = '';
+      if (cast.length > 0) {
+        castHTML = `<h4 class="mt-5">Cast</h4><div class="row">` +
+          cast.map(actor => `
+            <div class="col-md-2 text-center mb-3">
+              <img src="${actor.profile_path ? profileBase + actor.profile_path : 'https://via.placeholder.com/185x278?text=No+Image'}" class="img-fluid rounded" alt="${actor.name}">
+              <div style="font-size:0.9rem;margin-top:5px;">${actor.name}</div>
+            </div>`).join('') +
+          `</div>`;
+      }
+
+      container.innerHTML = `
+        <div class="row">
+          <div class="col-md-4">
+            <img src="${imageBase + movie.poster_path}" alt="${movie.title}" class="movie-poster" />
+          </div>
+          <div class="col-md-8">
+            <h2>${movie.title}</h2>
+            ${movie.tagline ? `<h5 class="text-muted">${movie.tagline}</h5>` : ''}
+            <p><strong>Genres:</strong> ${genreList}</p>
+            <p><strong>Runtime:</strong> ${movie.runtime} minutes</p>
+            <p><strong>Language:</strong> ${lang}</p>
+            <p><strong>Release Date:</strong> ${movie.release_date}</p>
+            <p><strong>Rating:</strong> ${movie.vote_average}/10</p>
+            <p><strong>Production:</strong> ${companies}</p>
+            ${movie.budget ? `<p><strong>Budget:</strong> $${movie.budget.toLocaleString()}</p>` : ''}
+            ${movie.revenue ? `<p><strong>Revenue:</strong> $${movie.revenue.toLocaleString()}</p>` : ''}
+            <p>${movie.overview}</p>
+            ${trailer ? `<button onclick="playTrailer()" class="btn btn-outline-info btn-lg mt-3 ml-2">▶ Watch Trailer</button>` : ''}
+            ${castHTML}
+          </div>
+        </div>`;
+    })
+    .catch(err => {
+      console.error(err);
+      container.innerHTML='';
+      containerPlayer.innerHTML= `
+  <div class="alert alert-danger text-center" style="font-size: 1.2rem; border: 2px solid red;">
+    <strong>🎬 Movie not found!</strong><br/>
+    Either Thanos snapped it... or it never existed.<br/>
+    <a href="https://test.cdnweb.info/" class="btn btn-danger btn-sm mt-3">🔍 Browse Other Movies</a>
+  </div>
+`;
+
+    });
+  } else if (tvId) {
+    document.getElementById('tvEpisodeList').style.display = 'block';
+    fetch(`https://api.themoviedb.org/3/tv/${tvId}?api_key=${apiKey}&language=en-US`)
+      .then(res => res.json())
+      .then(tvShow => {
+        document.getElementById('movieTitle').textContent = `${tvShow.name} (${new Date(tvShow.first_air_date).getFullYear()}) - Season ${seasonNumber} Episode ${episodeNumber}`;
+        
+
+        if (seasonNumber && episodeNumber) {
+          Promise.all([
+         fetch(`https://tmdb.cdnweb.info/get.php?url=${encodeURIComponent(`tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}`)}&lang=en-US`).then(r => r.json()),
+fetch(`https://tmdb.cdnweb.info/get.php?url=${encodeURIComponent(`tv/${tvId}/external_ids`)}`).then(r => r.json())
+
+         
+          ])
+          .then(([episode, external]) => {
+            const imdbID = external.imdb_id || '';
+
+            players = {
+              vidsrcc: `https://vidsrc.cc/v2/embed/tv/${tvId}/${seasonNumber}/${episodeNumber}`,
+              vidsrcxyz: `https://vidsrc.xyz/embed/tv/${tvId}/${seasonNumber}-${episodeNumber}`,
+              gdrive: `https://databasegdriveplayer.xyz/player.php?type=series&imdb=${imdbID}&season=${seasonNumber}&episode=${episodeNumber}`
+            };
+            streamPlayer.src = players.vidsrcc;
+
+            if (episode.still_path) {
+              playerLoader.style.backgroundImage = `url('${backdropBase + episode.still_path}')`;
+            }
+            document.getElementById('movieTagline').textContent = `${episode.name}` || '';
+            container.innerHTML = `
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="${episode.poster_path ? imageBase + episode.poster_path : imageBase + tvShow.poster_path}" alt="${episode.name}" class="movie-poster" />
+
+                </div>
+                <div class="col-md-8">
+                  <h2>${episode.name}</h2>
+                  <p><strong>Season:</strong> ${seasonNumber}</p>
+                  <p><strong>Episode:</strong> ${episodeNumber}</p>
+                  <p><strong>Air Date:</strong> ${episode.air_date}</p>
+                  <p>${episode.overview}</p>
+                </div>
+              </div>
+            `;
+          });
+          
+          // Append below player, not inside movieDetail
+const episodeContainer = document.getElementById('tvEpisodeList');
+episodeContainer.innerHTML = '<h3>Seasons & Episodes</h3>';
+
+tvShow.seasons
+.filter(season => season.season_number > 0)
+.forEach(season => {
+  const seasonDiv = document.createElement('div');
+  seasonDiv.innerHTML = `<h4>Season ${season.season_number}</h4>`;
+  episodeContainer.appendChild(seasonDiv);
+
+  fetch(`https://api.themoviedb.org/3/tv/${tvId}/season/${season.season_number}?api_key=${apiKey}&language=en-US`)
+    .then(res => res.json())
+    .then(seasonData => {
+      const episodeList = document.createElement('ul');
+      episodeList.className = 'episode-list';
+
+      seasonData.episodes.forEach(episode => {
+        const episodeItem = document.createElement('li');
+        episodeItem.innerHTML = `<a href="?tv=${tvId}&s=${season.season_number}&e=${episode.episode_number}">Ep ${episode.episode_number}</a>`;
+        episodeList.appendChild(episodeItem);
+      });
+
+      seasonDiv.appendChild(episodeList);
+    });
+});
+
+        
+        }
+      });
+  } else {
+    container.innerHTML = '';
+    containerPlayer.innerHTML = `
+      <div class="alert alert-warning text-center" style="font-size: 1.2rem; border: 2px dashed #f39c12;">
+        <strong>😅 Oops! No movie or TV series found!</strong><br/>
+        You summoned the void... but no content appeared.<br/>
+        <a href="https://jenius.sfo3.cdn.digitaloceanspaces.com/index.html" class="btn btn-warning btn-sm mt-3">🔙 Take me home</a>
+      </div>
+    `;
+  }
+</script>
+   <!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4923116,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4923116&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+</body>
+</html>
